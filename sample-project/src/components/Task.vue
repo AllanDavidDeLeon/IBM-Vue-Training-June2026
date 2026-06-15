@@ -218,12 +218,6 @@ h1 { color: #1B2A4A; margin-bottom: 20px; }
   border-radius: 6px;
   margin-bottom: 8px;
   border: 1px solid #eee;
-  display: flex;
-  align-items: center;
-}
-
-.task-list button {
-  margin-left: auto;
 }
 
 .task-list li span {
@@ -245,5 +239,6 @@ h1 { color: #1B2A4A; margin-bottom: 20px; }
   border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
+ margin-left: auto;
 }
 </style>
