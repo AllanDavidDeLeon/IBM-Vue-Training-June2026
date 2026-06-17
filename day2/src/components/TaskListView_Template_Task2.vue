@@ -5,28 +5,18 @@
 =============================================================
 -->
 <script setup>
-import { ref } from 'vue'
+import { useTaskStore } from '@/stores/taskStore'
 import TaskCard from './TaskCard_Template_Task2.vue'
 
-// TODO 1: Create a ref() tasks array with at least 3 sample tasks
-// Each task: { id, name, done, dueDate }
-// const tasks = ref([...])
-const tasks = ref([
-  {id: 1, name: 'Todo 1', done: false, dueDate: Date.now()},
-  {id: 2, name: 'Todo 2', done: true, dueDate: Date.now()},
-  {id: 3, name: 'Todo 3', done: false, dueDate: Date.now()}
-]);
-// TODO 2: Write handleComplete(id) — toggle the done state of the task with this id
+const store = useTaskStore()
+
 function handleComplete(id) {
-  const task = tasks.value.find(task => task.id === id)
-  if (task) {
-    task.done = !task.done
-  }
+  const task = store.tasks.find(t => t.id === id)
+  if (task) task.done = !task.done
 }
 
-// TODO 3: Write handleDelete(id) — remove the task with this id from the array
 function handleDelete(id) {
-  tasks.value = tasks.value.filter(task => task.id !== id)
+  store.tasks = store.tasks.filter(t => t.id !== id)
 }
 </script>
 
@@ -41,7 +31,7 @@ function handleDelete(id) {
          - Fill the "meta" named slot with the due date
     -->
       <TaskCard
-        v-for="task in tasks"
+        v-for="task in store.tasks"
         :key="task.id"
         :task="task"
         @complete="handleComplete"
@@ -51,7 +41,7 @@ function handleDelete(id) {
         Due: {{ task.dueDate }}
       </template>
     </TaskCard>
-    <p class="empty" v-if="tasks.length === 0">No tasks yet. Add one above!</p>
+    <p class="empty" v-if="store.tasks.length === 0">No tasks yet. Add one above!</p>
   </div>
 </template>
 

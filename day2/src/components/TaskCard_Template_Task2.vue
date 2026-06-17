@@ -61,9 +61,7 @@ HINTS (read only if stuck)
 
 <!-- ─── TaskCard.vue ─── -->
 <script setup>
-// TODO 1: import defineProps and defineEmits (they are compiler macros — no import needed
-//          but you DO need to call them)
-import { defineProps, defineEmits, shallowReactive } from 'vue'
+// Compiler macros `defineProps` and `defineEmits` are used below (no import)
 // TODO 2: Define the task prop with type Object, required: true
 // const props = defineProps({ ... })
 const props = defineProps({

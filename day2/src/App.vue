@@ -3,5 +3,5 @@ import TaskListView from "./components/TaskListView_Template_Task2.vue";
 </script>
 
 <template>
-  <TaskListView />
+  <RouterView />
 </template>
