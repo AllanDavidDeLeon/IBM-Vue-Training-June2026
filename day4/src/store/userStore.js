@@ -7,7 +7,6 @@ export const useUserStore = defineStore('users', () => {
     const isLoggedIn = ref(false)
 
     function login(name) {
-        name.value.trim()
 
         if (!name.value.trim()) return
 
