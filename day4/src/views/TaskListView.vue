@@ -11,17 +11,21 @@ import { storeToRefs } from 'pinia'
 // TODO 1: Import your store
 // import { useTaskStore } from '@/stores/taskStore'
 import { useTaskStore } from '../store/taskStore.js'
+import { useUserStore } from '../store/userStore.js'
 // TODO 2: Get the store instance
 // const taskStore = useTaskStore()
 const taskStore = useTaskStore()
+const userStore = useUserStore()
 // TODO 3: Destructure REACTIVE STATE using storeToRefs()
 // const { tasks, doneCount, pendingCount, totalCount } = storeToRefs(taskStore)
 const { tasks, doneCount, pendingCount, totalCount } = storeToRefs(taskStore)
+const { currentUser, isLoggedIn } = storeToRefs(userStore)
 // TODO 4: Destructure ACTIONS directly (no storeToRefs needed for functions)
 // const { addTask, toggleTask, removeTask } = taskStore
 const { addTask, toggleTask, removeTask } = taskStore
 // This local ref is fine — it's UI state, not task state
 const newTaskName = ref('')
+const newUser = ref('')
 
 function handleAdd() {
   // TODO 5: Call addTask() from the store, then clear the input
@@ -29,12 +33,20 @@ function handleAdd() {
   newTaskName.value = ''
 
 }
+function handleUser() {
+  userStore.login(newUser)
+  newUser.value = ''
+}
 </script>
 
 <template>
   <div class="task-view">
     <h1>📝 Tasks</h1>
-
+    <div v-if="!isLoggedIn">
+      <input v-model="newUser" placeholder="Username" @keyup.enter="handleUser" />
+      <button @click="handleUser">Login</button>
+    </div>
+    <p class="empty" v-if="isLoggedIn">Welcome, {{ currentUser }}!</p>
     <!-- TODO 6: Display totalCount, doneCount, pendingCount from the store -->
     <div class="stats">
       <!-- Total: {{ ??? }} | Done: {{ ??? }} | Pending: {{ ??? }} -->
