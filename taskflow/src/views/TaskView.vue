@@ -40,7 +40,7 @@ import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent, IonItem, IonInput, IonButton, IonText } from '@ionic/vue'
 import Tasks from '../components/Tasks.vue'
-import { useUserStore } from '../store/userStore'
+import { useUserStore } from '../store/userStore.js'
 
 const userStore = useUserStore()
 const { currentUser, isLoggedIn } = storeToRefs(userStore)

@@ -3,18 +3,23 @@
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="all" href="/tabs/all">
-          <ion-icon aria-hidden="true" :icon="triangle" />
+        <ion-tab-button tab="home" href="/tabs/home">
+          <ion-icon aria-hidden="true" :icon="home" />
+          <ion-label>Home</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="tasks" href="/tabs/tasks">
+          <ion-icon aria-hidden="true" :icon="addCircle" />
           <ion-label>Tasks</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="completed" href="/tabs/completed">
-          <ion-icon aria-hidden="true" :icon="ellipse" />
+          <ion-icon aria-hidden="true" :icon="checkbox" />
           <ion-label>Completed</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="settings" href="/tabs/settings">
-          <ion-icon aria-hidden="true" :icon="square" />
+          <ion-icon aria-hidden="true" :icon="settings" />
           <ion-label>Settings</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
@@ -24,5 +29,5 @@
 
 <script setup lang="ts">
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { checkbox, settings, home, addCircle } from 'ionicons/icons';
 </script>

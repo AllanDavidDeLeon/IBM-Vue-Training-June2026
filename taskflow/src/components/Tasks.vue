@@ -26,6 +26,9 @@
       <ion-item v-for="task in filteredTasks" :key="task.id">
         <ion-checkbox slot="start" :checked="task.done" @ionChange="toggleTask(task.id)" />
         <ion-label :class="{ done: task.done }">{{ task.name }}</ion-label>
+        <ion-button slot="end" fill="clear" @click="openTask(task.id)">
+          View
+        </ion-button>
         <ion-button slot="end" fill="clear" color="danger" @click="removeTask(task.id)">
           Remove
         </ion-button>
@@ -41,6 +44,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
 import {
   IonCard,
   IonCardContent,
@@ -67,6 +71,7 @@ const props = withDefaults(defineProps<{ mode?: TaskViewMode }>(), {
 const taskStore = useTaskStore()
 const { tasks } = storeToRefs(taskStore)
 const { addTask, toggleTask, removeTask } = taskStore
+const router = useRouter()
 
 const newTaskName = ref('')
 
@@ -89,6 +94,10 @@ const emptyMessage = computed(() => {
 function handleAdd() {
   addTask(newTaskName)
   newTaskName.value = ''
+}
+
+function openTask(id: number) {
+  router.push(`/tabs/tasks/${id}`)
 }
 </script>
 
