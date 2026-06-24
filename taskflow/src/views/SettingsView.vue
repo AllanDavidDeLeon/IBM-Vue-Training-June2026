@@ -12,12 +12,14 @@
         </ion-toolbar>
       </ion-header>
 
-      <ion-list inset>
-        <ion-item>
-          <ion-label>Dark mode</ion-label>
-          <ion-toggle :checked="isDarkMode" @ionChange="handleThemeToggle" />
-        </ion-item>
-      </ion-list>
+      <div class="settings-container">
+        <ion-list inset class="settings-list">
+          <ion-item>
+            <ion-label>Dark mode</ion-label>
+            <ion-toggle :checked="isDarkMode" @ionChange="handleThemeToggle" />
+          </ion-item>
+        </ion-list>
+      </div>
     </ion-content>
   </ion-page>
 </template>
@@ -45,3 +47,22 @@ function handleThemeToggle(event: CustomEvent) {
   document.body.classList.toggle('ion-palette-dark', enabled)
 }
 </script>
+
+<style scoped>
+.settings-container {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+.settings-list {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .settings-list {
+    max-width: 66%;
+  }
+}
+</style>

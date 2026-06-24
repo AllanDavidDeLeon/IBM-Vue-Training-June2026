@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonText } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonText } from '@ionic/vue'
 </script>
 
 <style scoped>
@@ -32,13 +32,6 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonText } from '@
   justify-content: center;
   gap: 20px;
   text-align: center;
-  padding: 24px;
-}
-
-.home-text {
-  font-size: 2.5rem;
-  font-weight: 700;
-  line-height: 1.1;
 }
 
 .home-image {
@@ -47,5 +40,11 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonText } from '@
   width: 100%;
   height: auto;
   object-fit: contain;
+}
+
+.home-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
 }
 </style>

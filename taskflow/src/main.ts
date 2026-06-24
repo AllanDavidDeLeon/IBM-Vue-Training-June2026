@@ -34,6 +34,8 @@ import '@ionic/vue/css/palettes/dark.class.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { defineCustomElements } from '@ionic/pwa-elements/loader'
+
 
 const app = createApp(App)
   .use(IonicVue)
@@ -45,4 +47,5 @@ document.body.classList.remove('ion-palette-dark')
 
 router.isReady().then(() => {
   app.mount('#app');
+  defineCustomElements(window)
 });

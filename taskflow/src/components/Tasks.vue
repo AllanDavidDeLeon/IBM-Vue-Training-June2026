@@ -103,13 +103,34 @@ function openTask(id: number) {
 
 <style scoped>
 .tasks-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-card {
   width: 100%;
+  max-width: 100%;
+}
+
+ion-list {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .add-card {
+    max-width: 66%;
+  }
+
+  ion-list {
+    max-width: 66%;
+  }
 }
 
 .input-row {
   display: flex;
   align-items: center;
-  gap: 12px;
 }
 
 .task-input {

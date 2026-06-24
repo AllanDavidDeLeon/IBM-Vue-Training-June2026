@@ -14,7 +14,7 @@
       </ion-header>
 
       <ion-card class="login-card">
-        <ion-card-content>
+        <ion-card-content v-if="!isLoggedIn">
           <ion-item lines="full">
             <ion-input
               v-model="newUser"
@@ -27,8 +27,8 @@
           </ion-item>
         </ion-card-content>
       </ion-card>
-
       <ion-text v-if="isLoggedIn" class="welcome">Welcome, {{ currentUser }}!</ion-text>
+
 
       <Tasks mode="all" />
     </ion-content>
@@ -56,11 +56,24 @@ function handleUser() {
 
 <style scoped>
 .login-card {
-  margin: 16px 16px 12px;
+  max-width: 100%;
+  margin: 16px auto 12px;
 }
 
 .welcome {
   display: block;
   padding: 0 16px 12px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .login-card {
+    max-width: 66%;
+  }
+
+  .welcome {
+    max-width: 66%;
+  }
 }
 </style>

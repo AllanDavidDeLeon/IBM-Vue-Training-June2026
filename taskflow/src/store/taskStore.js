@@ -16,7 +16,7 @@
 // stores/taskStore.js:
 //   - state: tasks array, nextId counter
 //   - getters (computed): doneCount, pendingCount, totalCount
-//   - actions: addTask(name), toggleTask(id), removeTask(id)
+//   - actions: addTask(name), toggleTask(id), removeTask(id), setTaskPhoto(id, photoUrl)
 //
 // TaskListView.vue (update your existing component):
 //   - Remove all local task state and action functions
@@ -85,7 +85,8 @@ export const useTaskStore = defineStore('tasks', () => {
     tasks.value.push ({
       id: nextId.value++,
       name: name.value.trim(),
-      done: false
+      done: false,
+      photoUrl: ''
     })
   }
 
@@ -104,7 +105,19 @@ export const useTaskStore = defineStore('tasks', () => {
     tasks.value = tasks.value.filter(t => t.id !== id)
   }
 
+  function setTaskPhoto(id, photoUrl) {
+    const task = tasks.value.find(t => t.id === id)
+    if (task) {
+      task.photoUrl = photoUrl
+    }
+  }
+
+  function addPhotoToTask(id, path) {
+    const task = tasks.value.find(t => t.id === id)
+    if (task) task.photo = path
+  }
+
   // TODO 7: Return everything the component needs to access
-  // return { tasks, totalCount, doneCount, pendingCount, addTask, toggleTask, removeTask }
-  return { tasks, totalCount, doneCount, pendingCount, addTask, toggleTask, removeTask }
+  // return { tasks, totalCount, doneCount, pendingCount, addTask, toggleTask, removeTask, setTaskPhoto }
+  return { tasks, totalCount, doneCount, pendingCount, addTask, toggleTask, removeTask, setTaskPhoto }
 })

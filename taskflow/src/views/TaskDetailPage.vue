@@ -23,6 +23,8 @@
 
         <ion-card-content>
           <ion-text class="detail-line">Status: {{ task.done ? 'Completed' : 'Pending' }}</ion-text>
+          <ion-button @click="addPhotoToTask">Add Photo</ion-button>
+          <img v-if="task.photoUrl" class="task-photo" :src="task.photoUrl" alt="Task photo" />
         </ion-card-content>
       </ion-card>
 
@@ -49,16 +51,30 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
-  IonCardSubtitle,
   IonCardContent,
   IonText,
+  IonButton,
 } from '@ionic/vue'
+import { Camera, CameraResultType } from '@capacitor/camera'
 import { useTaskStore } from '../store/taskStore'
 
 const route = useRoute()
 const taskStore = useTaskStore()
 
-const task = computed(() => taskStore.tasks.find(taskItem => taskItem.id === Number(route.params.id)))
+const task = computed<any>(() => taskStore.tasks.find(taskItem => taskItem.id === Number(route.params.id)))
+
+async function addPhotoToTask() {
+  if (!task.value) return
+
+  try {
+    const photo = await Camera.getPhoto({
+      resultType: CameraResultType.DataUrl,
+    })
+
+    task.value.photoUrl = photo.dataUrl ?? ''
+  } catch {
+  }
+}
 </script>
 
 <style scoped>
@@ -77,5 +93,13 @@ const task = computed(() => taskStore.tasks.find(taskItem => taskItem.id === Num
   display: block;
   margin-bottom: 16px;
   font-size: 1.1rem;
+}
+
+.task-photo {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 16px;
+  border-radius: 12px;
 }
 </style>
