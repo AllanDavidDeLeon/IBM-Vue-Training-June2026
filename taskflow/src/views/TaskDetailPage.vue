@@ -23,7 +23,7 @@
 
         <ion-card-content>
           <ion-text class="detail-line">Status: {{ task.done ? 'Completed' : 'Pending' }}</ion-text>
-          <ion-button @click="addPhotoToTask">Add Photo</ion-button>
+          <ion-button @click="takePhoto">Add Photo</ion-button>
           <img v-if="task.photoUrl" class="task-photo" :src="task.photoUrl" alt="Task photo" />
         </ion-card-content>
       </ion-card>
@@ -63,16 +63,16 @@ const taskStore = useTaskStore()
 
 const task = computed<any>(() => taskStore.tasks.find(taskItem => taskItem.id === Number(route.params.id)))
 
-async function addPhotoToTask() {
+async function takePhoto() {
   if (!task.value) return
 
   try {
     const photo = await Camera.getPhoto({
       resultType: CameraResultType.DataUrl,
     })
-
-    task.value.photoUrl = photo.dataUrl ?? ''
-  } catch {
+    taskStore.setTaskPhoto(task.value.id, photo.dataUrl ?? '')
+  } catch (error) {
+    console.error(error)
   }
 }
 </script>
